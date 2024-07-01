@@ -1,0 +1,219 @@
+#GO 
+
+## GO COMMAND 
+
+# go run :
+Compile les fichier go dans un dossiers temporaires, execute le "binary" et supprime apres l'avoir fait.
+
+```go
+go run hello.go
+```
+## go build : 
+compile le programme dans un binary, possibilité de choir le nom du binaire mais par default c'est le nom du fichier ou du dossier ou le chemin dans lequel ou dans un chemin choisi. 
+
+```go
+go build -o surprise main.go
+```
+## go install
+Les programmes Go peuvent être distribués sous forme de binaires précompilés ou construits à partir du code source et installés via la commande go install. Contrairement à d'autres langages, Go ne dépend pas d'un service centralisé comme Maven Central ou NPM, mais utilise des dépôts de code source pour partager des projets. La commande go install nécessite l'emplacement du dépôt et la version de l'outil (par exemple, @latest pour la dernière version) et installe l'outil dans le répertoire $GOPATH/bin.
+
+```go
+go install github.com/rakyll/hey@latest
+```
+
+## FORMATTING :
+Les programmes Go peuvent être distribués sous forme de binaires précompilés ou construits à partir du code source et installés via la commande go install. Contrairement à d'autres langages, Go ne dépend pas d'un service centralisé comme Maven Central ou NPM, mais utilise des dépôts de code source pour partager des projets. La commande go install nécessite l'emplacement du dépôt et la version de l'outil (par exemple, @latest pour la dernière version) et installe l'outil dans le répertoire $GOPATH/bin.
+
+En plus de go install, Go offre plusieurs autres outils utiles :
+
+    go fmt : formate automatiquement le code selon les conventions Go.
+    go imports : nettoie les imports non utilisés et formate les imports restants.
+    go lint : aide à respecter les guidelines de style et de bonnes pratiques.
+    go vet : détecte les erreurs potentielles dans le code, telles que les variables non utilisées.
+
+Ces outils aident à maintenir un code propre, bien formaté et conforme aux standards de la communauté Go.
+
+## GO PRIMITIVE:
+
+## La valeur zéro :
+Go, comme la plupart des langages modernes, attribue une valeur zéro par défaut à toute variable
+
+## GO lITERAUX :
+Littéraux en Go
+
+En Go, un littéral fait référence à l'écriture explicite d'un nombre, d'un caractère ou d'une chaîne de caractères dans le code. Il existe quatre types courants de littéraux que vous trouverez dans les programmes Go, et un cinquième type rare que nous aborderons en discutant des nombres complexes.
+Littéraux entiers
+
+Les littéraux entiers sont des séquences de chiffres. Par défaut, ils sont en base 10, mais Go utilise différents préfixes pour indiquer d'autres bases :
+
+    Binaire (base 2) : préfixe 0b (par exemple, 0b1010).
+    Octal (base 8) : préfixe 0o (par exemple, 0o12).
+    Hexadécimal (base 16) : préfixe 0x (par exemple, 0x1A).
+
+Vous pouvez utiliser des lettres majuscules ou minuscules pour les préfixes (0x ou 0X). Notez qu'un 0 initial sans lettre après (012) représente également un littéral octal en Go, mais il est déconseillé d'utiliser cette notation car elle est source de confusion.
+Utilisation des underscores
+
+Pour rendre les littéraux entiers longs plus lisibles, Go permet l'utilisation d'underscores _ au milieu du littéral. Par exemple, vous pouvez regrouper les chiffres par milliers en base 10 comme suit : 1_234_567. Les underscores n'ont aucun effet sur la valeur du nombre.
+Limitations des underscores
+
+    Les underscores ne peuvent pas être placés au début ou à la fin des nombres.
+    Ils ne peuvent pas être adjacents (1__234 est invalide).
+
+Vous pouvez théoriquement mettre un underscore entre chaque chiffre (1_2_3_4), mais cela est fortement déconseillé. Utilisez-les plutôt pour améliorer la lisibilité en divisant les nombres en base 10 par milliers ou en divisant les nombres binaires, octaux ou hexadécimaux à des frontières de 1, 2 ou 4 octets.
+
+Exemples :
+
+    Base 10 : 1_000_000
+    Binaire : 0b1010_1101
+    Octal : 0o755_123
+    Hexadécimal : 0x1A3F_FF
+
+En suivant ces conventions, vous rendrez vos littéraux numériques plus clairs et plus faciles à lire pour les autres développeurs.
+
+Littéraux à virgule flottante en Go
+
+Les littéraux à virgule flottante en Go utilisent des points décimaux pour indiquer la partie fractionnaire de la valeur. Ils peuvent également inclure un exposant, spécifié avec la lettre e suivie d'un nombre positif ou négatif.
+Exemples en notation décimale :
+
+    6.03e23 (équivalent à 6.03×10236.03×1023)
+    1.5 (simplement 1.5)
+
+Il est également possible d'écrire des littéraux à virgule flottante en notation hexadécimale en utilisant le préfixe 0x et la lettre p pour indiquer l'exposant.
+Exemples en notation hexadécimale :
+
+    0x1.91eb851eb851fp+1 (équivalent à 1.10111010111000000000000000000000000000000000000000002×211.10111010111000000000000000000000000000000000000000002​×21)
+
+Comme pour les littéraux entiers, vous pouvez utiliser des underscores _ pour formater vos littéraux à virgule flottante et les rendre plus lisibles.
+Exemples avec underscores :
+
+    1_000.000_001 (milliers séparés par des underscores)
+    6.03e2_3 (exposant avec un underscore)
+    0x1.91eb_851f_p+1 (partie hexadécimale et exposant avec des underscores)
+
+Ces notations rendent les nombres plus faciles à lire et à comprendre, améliorant ainsi la clarté du code.
+
+## Littéraux de runes et chaînes en Go :
+
+Les littéraux de runes représentent des caractères et sont entourés de guillemets simples. Contrairement à de nombreux langages, les guillemets simples et doubles ne sont pas interchangeables en Go. Voici quelques façons de les écrire :
+
+    Caractère Unicode simple : 'a'
+    Numéros octaux 8 bits : '\141'
+    Numéros hexadécimaux 8 bits : '\x61'
+    Numéros hexadécimaux 16 bits : '\u0061'
+    Numéros Unicode 32 bits : '\U00000061'
+
+Les littéraux de runes incluent aussi des caractères échappés avec des backslashes, comme le saut de ligne ('\n'), la tabulation ('\t'), le guillemet simple ('\''), le guillemet double ('\"'), et le backslash ('\\').
+Littéraux de chaînes
+
+Il existe deux façons d'indiquer les littéraux de chaînes en Go :
+
+    Chaînes interprétées : Utilisez des guillemets doubles pour créer des chaînes interprétées ("Hello, World!"). Elles peuvent contenir des littéraux de runes, mais pas de backslashes, de sauts de ligne ou de guillemets doubles non échappés. Exemple :
+
+    go
+
+"Bonjour\n\"le Monde\""
+
+Chaînes brutes : Utilisez des backquotes (`) pour les chaînes brutes qui peuvent contenir n'importe quel caractère sauf le backquote. Exemple :
+
+go
+
+    `Bonjour
+    "le Monde"`
+
+Utilisation des littéraux
+
+    Les littéraux en Go sont non typés par défaut et peuvent interagir avec n'importe quelle variable compatible.
+    Vous ne pouvez pas assigner un littéral de chaîne à une variable numérique ou un littéral numérique à une variable de chaîne.
+    Les littéraux numériques ne peuvent pas dépasser la capacité de la variable cible, sinon cela génère une erreur à la compilation.
+
+Par exemple, pour assigner un littéral à une variable :
+
+go
+
+var f float64 = 42 // OK
+var b byte = 1000 // Erreur : dépassement de capacité
+
+Lorsque le type n'est pas explicitement déclaré, Go utilise un type par défaut pour le littéral, comme nous le verrons dans la section sur l'affectation des variables.
+ 
+## NUMERIC TYPE
+ ## Types Entiers
+
+Go propose des entiers signés et non signés de différentes tailles, allant d'un à quatre octets :
+
+| Type   | Plage de valeurs                       |
+|--------|----------------------------------------|
+| int8   | -128 à 127                             |
+| int16  | -32768 à 32767                         |
+| int32  | -2147483648 à 2147483647               |
+| int64  | -9223372036854775808 à 9223372036854775807 |
+| uint8  | 0 à 255                                |
+| uint16 | 0 à 65535                              |
+| uint32 | 0 à 4294967295                         |
+| uint64 | 0 à 18446744073709551615               |
+
+La valeur zéro pour tous les types entiers est 0.
+
+## The special integer Types
+Un bytes est un alias the uint8, it is legal to assign, compare, or perform mathematical operations
+between a byte and a uint8.
+
+dans une archicture 64 int prend deviens int64 signed et dans une architecture 32 il deviens un int32 signed
+The third special name is uint. It follows the same rules as int, only it is
+unsigned
+
+f you are working with a binary file format or network protocol that
+has an integer of a specific size or sign, use the corresponding integer
+type.
+If you are writing a library function that should work with any integer
+type, write a pair of functions, one with int64 for the parameters and
+variables and the other with uint64. (We talk more about functions
+and their parameters in
+sinon utilisez int
+
+# Floating Point Types
+
+Il existe deux types de nombres à virgule flottante en Go :
+
+| Type     | Valeur absolue maximale                                      | Valeur absolue minimale (non nulle)                           |
+|----------|--------------------------------------------------------------|---------------------------------------------------------------|
+| float32  | 3.40282346638528859811704183484516925440e+38                 | 1.401298464324817070923729583289916131280e-45                 |
+| float64  | 1.797693134862315708145274237317043567981e+308               | 4.940656458412465441765687928682213723651e-324                |
+
+Comme pour les types entiers, la valeur zéro pour les types de nombres à virgule flottante est 0.
+
+Les nombres à virgule flottante en Go fonctionnent de manière similaire à ceux des autres langages de programmation. Go utilise la spécification IEEE 754, offrant une large gamme et une précision limitée. Le choix du type de nombre flottant à utiliser est simple : sauf si vous devez être compatible avec un format existant, utilisez `float64`. Les littéraux de nombres flottants ont par défaut le type `float64`, donc utiliser toujours `float64` est l'option la plus simple. Cela aide également à atténuer les problèmes de précision des nombres flottants, car un `float32` n'a que 6 ou 7 chiffres décimaux de précision.
+
+WARNING
+A floating-point number cannot represent a decimal value exactly. Do not use them to
+represent money or any other value that must have an exact decimal representation!
+on ne peut pas utilser modulo avec les floats
+
+While Go lets you use == and != to compare floats, don’t do it. Due to the
+inexact nature of floats, two floating point values might not be equal when you
+think they should be. Instead, define a minimum allowed variance and see if the
+difference between two floats is less than that
+
+## A Taste of Strings and Runes : 
+Strings in Go are immutable; you can reassign the value of a string variable, but
+you cannot change the value of the string that is assigned to it.
+
+## TYPE 
+. Since all type conversions in
+Go are explicit, you cannot treat another Go type as a boolean.
+```go
+var x int = 10
+if x {
+        //Do some
+    } // do not do this
+//Do
+if x != 0 {
+    // Do something
+    }
+```
+
+You can declare multiple variables at once with var, and they can be of the
+same type:
+```go
+var x, y int = 10, 20
+var x, y  = 10, "HELLO "
+```
